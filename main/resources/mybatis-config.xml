@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <typeAliases>
+    <typeAlias alias="TmpUser" type="com.fastcampus.web3.dto.TmpUserDTO"/>
+    <typeAlias alias="UserDTO" type="com.fastcampus.web3.dto.UserDTO"/>
+    <typeAlias alias="BoardDTO" type="com.fastcampus.web3.dto.BoardDTO"></typeAlias>
+  </typeAliases>
+
+</configuration>
