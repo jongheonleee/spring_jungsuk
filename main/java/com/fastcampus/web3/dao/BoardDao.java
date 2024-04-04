@@ -13,7 +13,8 @@ public interface BoardDao {
     int delete(Integer bno) throws Exception;
     int deleteAll() throws Exception;
     int update(BoardDTO boardDTO) throws Exception;
-//    int incrementViewCnt(Integer bno) throws Exception;
-//    List<BoardDTO> selectPage(Map map) throws Exception;
+    int incrementViewCnt(Integer bno) throws Exception;
+    // offSet(), pageSize
+    List<BoardDTO> selectPage(Map map) throws Exception;
 
 }

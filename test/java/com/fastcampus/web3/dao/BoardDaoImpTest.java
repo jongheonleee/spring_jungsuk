@@ -3,7 +3,9 @@ package com.fastcampus.web3.dao;
 import com.fastcampus.web3.dto.BoardDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.sql.DataSource;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -86,6 +88,33 @@ public class BoardDaoImpTest extends TestCase {
             // 1-6-2. 테이블 데이터 10개, 모두 삭제, 로우수 카운트
             // 1-6-3. 테이블 데이터 100개, 모두 삭제, 로우수 카운트
             // 1-6-4. 테이블 데이터 1000개, 모두 삭제, 로우수 카운트
+
+        // 1-7. incrementViewCnt ✅
+            // 1-7-0. 없는 데이터 뷰 카운트 올림
+            // 1-7-1. 테이블 데이터 1개, 뷰 카운트 올림, 조회한 후 카운트 확인
+            // 1-7-2. 테이블 데이터 10개
+                // 1-7-2-0. 모두 뷰 카운트 올림, 조회한 후 카운트 확인
+                // 1-7-2-1. 랜덤 뷰 카운트 올림, 조회한 후 카운트 확인
+            // 1-7-3. 테이블 데이터 100개
+                // 1-7-3-0. 모두 뷰 카운트 올림, 조회한 후 카운트 확인
+                // 1-7-3-1. 랜덤 뷰 카운트 올림, 조회한 후 카운트 확인
+            // 1-7-4. 테이블 데이터 1000개
+                // 1-7-4-0. 모두 뷰 카운트 올림, 조회한 후 카운트 확인
+                // 1-7-4-1. 랜덤 뷰 카운트 올림, 조회한 후 카운트 확인
+
+        // 1-8. selectPage ✅
+            // 1-8-0. 데이터가 없는 경우, 조회, 길이 0 확인
+            // 1-8-1. 데이터가 10개
+                // 1-8-1-0. 조회, 길이 10 확인
+                // 1-8-1-1. 잘못 조회, 예외 발생
+            // 1-8-2. 데이터가 100개
+                // 1-8-2-0. 조회, 길이 100 확인
+                // 1-8-2-0. 잘못 조회, 예외 발생
+            // 1-8-3. 데이터가 1000개
+                // 1-8-3-0. 조회, 길이 1000 확인
+                // 1-8-3-0. 잘못 조회, 예외 발생
+
+
     @Test
     public void countOneData() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
@@ -633,6 +662,335 @@ public class BoardDaoImpTest extends TestCase {
         assertTrue(expectedTotalRowCnt == actualTotalRowCnt);
     }
 
+    @Test
+    public void EmptyDataIncrementViewCntTest() throws Exception {
+        // given & when : 테이블 비움, 0 세팅
+        // do : dao를 통해 없는 데이터 뷰 카운트 올림
+        // assert(compare) : 적용된 로우수가 0 인지 확인
+        cleanDB();
+        int expectedRowCnt = 0;
+        int actualRowCnt = boardDao.incrementViewCnt(1);
+        assertTrue(expectedRowCnt == actualRowCnt);
+
+    }
+
+    @Test
+    public void OneDataIncrementViewCntTest() throws Exception  {
+        // given & when : 테이블 비움, 데이터 생성 및 저장
+        // do : dao를 통해 해당 데이터 뷰 카운트 올림
+        // assert(compare) : 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        BoardDTO testData = createTestData(1);
+
+        boardDao.insert(testData);
+        int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
+        BoardDTO target = boardDao.select(testData.getBno());
+
+        assertTrue(expectedRowCnt == actualRowCnt);
+        assertTrue(expectedViewCnt == target.getView_cnt());
+    }
+
+    @Test
+    public void TenDataIncrementViewCntTest1() throws Exception  {
+        // given & when : 테이블 비움, 데이터 10개 생성 및 저장
+        // do : dao를 통해 모든 데이터 뷰 카운트 올림
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 10;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+
+            boardDao.insert(testData);
+            int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
+            BoardDTO target = boardDao.select(testData.getBno());
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+
+    }
+
+    @Test
+    public void TenDataIncrementViewCntTest2() throws Exception  {
+        // given & when : 테이블 비움, 데이터 10개 생성 및 저장
+        // do : dao를 통해 랜덤 데이터 뷰 카운트 올림(5번 반복, 중복된 랜덤값 넘어감)
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 10;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        for (int i=1; i<=5; i++) {
+            int randomIdx = (int)(Math.random() * repeat) + 1;
+            int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
+
+            BoardDTO target = boardDao.select(randomIdx);
+            if (target.getView_cnt() >= 2) continue;
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+    }
+
+    @Test
+    public void OneHundredDataIncrementViewCntTest1() throws Exception  {
+        // given & when : 테이블 비움, 데이터 100개 생성 및 저장
+        // do : dao를 통해 모든 데이터 뷰 카운트 올림
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 100;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+
+            boardDao.insert(testData);
+            int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
+            BoardDTO target = boardDao.select(testData.getBno());
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+
+    }
+
+    @Test
+    public void OneHundredDataIncrementViewCntTest2() throws Exception  {
+        // given & when : 테이블 비움, 데이터 100개 생성 및 저장
+        // do : dao를 통해 랜덤 데이터 뷰 카운트 올림(5번 반복, 중복된 랜덤값 넘어감)
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 100;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        for (int i=1; i<=5; i++) {
+            int randomIdx = (int)(Math.random() * repeat) + 1;
+            int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
+            BoardDTO target = boardDao.select(randomIdx);
+
+            if (target.getView_cnt() >= 2) continue;
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+    }
+
+    @Test
+    public void OneThousandDataIncrementViewCntTest1() throws Exception  {
+        // given & when : 테이블 비움, 데이터 1000개 생성 및 저장
+        // do : dao를 통해 모든 데이터 뷰 카운트 올림
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 1000;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+
+            boardDao.insert(testData);
+            int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
+            BoardDTO target = boardDao.select(testData.getBno());
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+
+    }
+
+    @Test
+    public void OneThousandDataIncrementViewCntTest2() throws Exception  {
+        // given & when : 테이블 비움, 데이터 1000개 생성 및 저장
+        // do : dao를 통해 랜덤 데이터 뷰 카운트 올림(5번 반복, 중복된 랜덤값 넘어감)
+        // assert(compare) : 각 적용된 로우수가 1이고 뷰 카운트가 1인지 확인
+        cleanDB();
+        int repeat = 1000;
+        int expectedRowCnt = 1;
+        int expectedViewCnt = 2;
+
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        for (int i=1; i<=5; i++) {
+            int randomIdx = (int)(Math.random() * repeat) + 1;
+            int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
+            BoardDTO target = boardDao.select(randomIdx);
+
+            if (target.getView_cnt() >= 2) continue;
+
+            assertTrue(expectedRowCnt == actualRowCnt);
+            assertTrue(expectedViewCnt == target.getView_cnt());
+        }
+    }
+
+    @Test
+    public void selectPageEmptyDataTest() throws Exception {
+        // given & when : 테이블 비움
+        // do : dao로 페이지 조회
+        // assert(compare) : 길이 0 확인
+        cleanDB();
+        Map<String, Integer> map = createTestMap(0);
+        int expectedLength = 0;
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
+
+    @Test
+    public void selectPageOneDataTest() throws Exception {
+        // given & when : 테이블 비움, 데이터 1개 생성, 저장
+        // do : dao로 페이지 조회
+        // assert(compare) : 길이 1 확인
+        cleanDB();
+        int expectedLength = 1;
+        Map<String, Integer> map = createTestMap(0);
+        BoardDTO testData = createTestData(1);
+        boardDao.insert(testData);
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
+
+    @Test
+    public void selectPageTenDataTest1() throws Exception {
+        // given & when : 테이블 비움, 데이터 10개 생성, 저장
+        // do : dao로 페이지 조회
+        // assert(compare) : 길이 10 확인
+        cleanDB();
+        int repeat = 10;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(0);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
+
+    @Test(expected = Exception.class)
+    public void selectPageTenDataTest2() throws Exception {
+        // given & when : 테이블 비움, 데이터 10개 생성, 저장
+        // do : dao로 페이지 잘못 조회
+        // assert(compare) : 길이 0 확인
+        cleanDB();
+        int repeat = 10;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(-1);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+    }
+
+
+    @Test
+    public void selectPageOneHundredDataTest1() throws Exception {
+        // given & when : 테이블 비움, 데이터 100개 생성, 저장
+        // do : dao로 페이지 조회
+        // assert(compare) : 길이 10 확인
+        cleanDB();
+        int repeat = 100;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(0);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
+
+
+    @Test(expected = Exception.class)
+    public void selectPageOneHundredDataTest2() throws Exception {
+        // given & when : 테이블 비움, 데이터 100개 생성, 저장
+        // do : dao로 페이지 잘못 조회
+        // assert(compare) : 길이 10 확인
+        cleanDB();
+        int repeat = 100;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(-1);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+    }
+
+
+    @Test
+    public void selectPageOneThousandDataTest1() throws Exception {
+        // given & when : 테이블 비움, 데이터 1000개 생성, 저장
+        // do : dao로 페이지 조회
+        // assert(compare) : 길이 10 확인
+        cleanDB();
+        int repeat = 1000;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(0);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
+
+    @Test(expected = Exception.class)
+    public void selectPageOneThousandDataTest2() throws Exception {
+        // given & when : 테이블 비움, 데이터 1000개 생성, 저장
+        // do : dao로 페이지 잘못 조회
+        // assert(compare) : 길이 0 확인
+        cleanDB();
+        int repeat = 1000;
+        int expectedLength = 10;
+        Map<String, Integer> map = createTestMap(-1);
+        for (int i=1; i<=repeat; i++) {
+            BoardDTO testData = createTestData(i);
+            boardDao.insert(testData);
+        }
+
+        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        int actualLength = boardDTOS.size();
+
+        assertTrue(expectedLength == actualLength);
+    }
 
 
 
@@ -652,5 +1010,12 @@ public class BoardDaoImpTest extends TestCase {
     private BoardDTO createUpdateTestData(int i) {
         BoardDTO createdBoard = new BoardDTO(i, "title2", "content2", "writer2", 1, 1, null, null);
         return createdBoard;
+    }
+
+    private Map<String, Integer> createTestMap(int i) {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("offset", i);
+        map.put("pageSize", 10);
+        return map;
     }
 }

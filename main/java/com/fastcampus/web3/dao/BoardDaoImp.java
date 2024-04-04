@@ -2,6 +2,7 @@ package com.fastcampus.web3.dao;
 
 import com.fastcampus.web3.dto.BoardDTO;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,5 +48,15 @@ public class BoardDaoImp implements BoardDao {
     @Override
     public int update(BoardDTO boardDTO) throws Exception {
         return session.update(namespace + "update", boardDTO);
+    }
+
+    @Override
+    public int incrementViewCnt(Integer bno) throws Exception {
+        return session.update(namespace + "incrementViewCnt", bno);
+    }
+
+    @Override
+    public List<BoardDTO> selectPage(Map map) throws Exception {
+        return session.selectList(namespace + "selectPage", map);
     }
 }

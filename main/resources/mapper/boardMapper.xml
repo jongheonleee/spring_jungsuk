@@ -13,6 +13,7 @@
            comment_cnt,
            reg_date,
            up_date
+    FROM BOARD
   </sql>
 
   <select id="count" parameterType="BoardDTO" resultType="Integer">
@@ -54,4 +55,15 @@
     TRUNCATE BOARD
   </delete>
 
+  <update id="incrementViewCnt" parameterType="BoardDTO">
+    UPDATE BOARD
+    SET view_cnt = view_cnt+1
+    where bno = #{bno}
+  </update>
+
+  <select id="selectPage" parameterType="map" resultType="BoardDTO">
+    <include refid="selectBoard"/>
+    ORDER BY reg_date DESC, bno DESC
+    LIMIT #{offset}, #{pageSize}
+  </select>
 </mapper>
