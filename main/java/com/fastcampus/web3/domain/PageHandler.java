@@ -4,6 +4,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 // 📌 나중에 이넘으로 변환
 public class PageHandler {
+
     public final int NAV_SIZE = 10;
     public final int PAGE_SIZE = 10;
     private int currPage; // 현재 페이지
@@ -26,8 +27,8 @@ public class PageHandler {
         this.currPage = Math.min(currPage, totalPage);
         this.beginPage = (currPage-1) / NAV_SIZE * NAV_SIZE + 1;
         this.endPage = Math.min(beginPage + NAV_SIZE - 1, totalPage);
-        this.showPrev = beginPage != 1;
-        this.showNext = endPage != totalPage;
+        this.showPrev = currPage != 1;
+        this.showNext = currPage != totalPage;
 
     }
 
@@ -82,6 +83,10 @@ public class PageHandler {
 
     public boolean isShowNext() {
         return showNext;
+    }
+
+    public int getPAGE_SIZE() {
+        return PAGE_SIZE;
     }
 
     @Override

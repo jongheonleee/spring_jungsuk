@@ -63,7 +63,7 @@
 <body>
 <jsp:include page="header.jsp" flush="false"/>
 <jsp:include page="navigation.jsp" flush="false"/>
-<img src="<c:url value = 'resources/img/img1.png'/>"> <!--정적 파일은 절대 경로로 지정-->
+<img src="<c:url value = 'resources/img/img1.png'/>" style="width: 100%; height: auto;" > <!--정적 파일은 절대 경로로 지정-->
 <jsp:include page="footer.jsp" flush="false"/>
 </body>
 </html>

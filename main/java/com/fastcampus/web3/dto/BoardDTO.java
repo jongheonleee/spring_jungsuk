@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class BoardDTO {
 
-    private int bno;
-    private String title;
-    private String content;
-    private String writer;
-    private int view_cnt;
-    private int comment_cnt;
-    private Date reg_date;
-    private Date up_date;
+    private int bno; // 번호
+    private String title; // 글제목
+    private String writer; // 글쓴이
+    private String content; // 글내용
+    private int view_cnt; // 뷰카운트
+    private int comment_cnt; // 댓글카운트
+    private Date reg_date; // 등록일
+    private Date up_date; // 수정일
 
     public BoardDTO() {}
 

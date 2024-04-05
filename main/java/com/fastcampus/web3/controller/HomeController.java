@@ -14,4 +14,9 @@ public class HomeController {
         return "/web3/index";
     }
 
+    @GetMapping("/test2")
+    public String test2() {
+        return "/web3/test2";
+    }
+
 }

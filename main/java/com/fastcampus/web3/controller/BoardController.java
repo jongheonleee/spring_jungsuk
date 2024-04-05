@@ -1,16 +1,13 @@
 package com.fastcampus.web3.controller;
-
-
 import com.fastcampus.web3.domain.PageHandler;
 import com.fastcampus.web3.dto.BoardDTO;
 import com.fastcampus.web3.service.BoardService;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.rmi.server.ExportException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,63 +35,122 @@ public class BoardController {
         // board/modify?bno=번호 (GET) : 수정할 게시물 조회
         // board/modify (POST) :  게시물 수정
     @GetMapping("/list")
-    public String boardList(Integer page, Integer pageSize, HttpServletRequest request, HttpSession session, Model model)
-            throws Exception {
+    public String boardList(Integer currPage, Integer pageSize, HttpServletRequest request, HttpSession session, Model model) {
         // 세션 확인
         // 페이지 핸들러 계산
         // 에러 처리
-        List<BoardDTO> list = boardService.getList();
-        System.out.println(boardService.getCount());
-        model.addAttribute("list", list);
+        if (!isSession(session)) {
+            System.out.println(request.getServletPath());
+            return "redirect:/login/login?toURL="+request.getServletPath();
+        }
+
+        currPage = (currPage == null || currPage == 0) ? 1 : currPage;
+        pageSize = (pageSize == null || pageSize == 0) ? 10 : pageSize;
+
+        try {
+            int totalCnt = boardService.getCount();
+            System.out.println(currPage + ", " + pageSize);
+            List<BoardDTO> list = boardService.getPage(currPage, pageSize);
+//            for (BoardDTO boardDTO : list) {
+//                System.out.println(boardDTO.getBno());
+//            }
+            PageHandler ph = new PageHandler(currPage, totalCnt);
+            model.addAttribute("ph", ph);
+            model.addAttribute("list", list);
+            return "/web3/boardList";
+        } catch (Exception e) {
+            // 예외 처리
+        }
         return "/web3/boardList";
+    }
+
+    private boolean isSession(HttpSession session) {
+        return "asdf".equals(session.getAttribute("id"));
     }
 
 
     @GetMapping("/read")
-    public String read(Integer bno) {
-        System.out.println("readPage");
-        return "";
+    public String read(Integer bno, Model model) throws Exception {
+        try {
+            BoardDTO boardDTO = boardService.read(bno);
+            System.out.println(boardDTO.getView_cnt());
+            model.addAttribute("boardDTO", boardDTO);
+        } catch (Exception e) {
+            // 예외 처리
+        }
+
+        return "/web3/boardDetail";
     }
 
     @GetMapping("/remove")
     public String remove(Integer bno) {
-        System.out.println("removePage");
-        return "";
+        try {
+            int rowCnt = boardService.remove(bno);
+            if (rowCnt != 1) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("삭제되지 않음");
+        }
+
+        return "redirect:/board/list";
     }
 
-//    @PostMapping("/remove")
-//    public String remove(BoardDTO boardDTO) {
-//
-//        return "";
-//    }
+    @PostMapping("/remove")
+    public String remove(BoardDTO boardDTO) {
+        try {
+            int rowCnt = boardService.remove(boardDTO.getBno());
+            if (rowCnt != 1) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("삭제 실패");
+        }
+
+        return "redirect:/board/list";
+    }
+
 
     @GetMapping("/write")
-    public String writeForm() {
-        System.out.println("writeFormPage");
+    public String writeForm(HttpServletRequest request, HttpSession session) {
+        if (!isSession(session)) {
+            System.out.println(request.getServletPath());
+            return "redirect:/login/login?toURL="+request.getServletPath();
+        }
+
         return "/web3/boardForm";
     }
 
     @PostMapping("/write")
-    public String write(BoardDTO boardDTO, Model model) {
+    public String write(BoardDTO boardDTO) {
         try {
             int rowCnt = boardService.write(boardDTO);
-            System.out.println(rowCnt);
-            System.out.println(boardDTO);
+            if (rowCnt != 1) {
+                throw new Exception();
+            }
         } catch (Exception e) {
+            // 예외 처리
             e.printStackTrace();
         }
         return "redirect:/board/list";
     }
 
     @GetMapping("/modify")
-    public String modifyForm(Integer bno) {
+    public String modifyForm(Integer bno, Model model) {
         System.out.println("modifyPage");
-        return "";
+        return "redirect:/board/list";
     }
 
     @PostMapping("/modify")
     public String modify(BoardDTO boardDTO) {
-        System.out.println("modifyPage2");
-        return "";
+        try {
+            int rowCnt = boardService.modify(boardDTO);
+            if (rowCnt != 1) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            System.out.println("수정에 실패했습니다.");
+        }
+        return "redirect:/board/list";
     }
 }

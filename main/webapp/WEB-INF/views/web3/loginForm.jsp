@@ -3,15 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style>
       body {font-family: Arial, Helvetica, sans-serif;}
-
-
-      /* Header/logo Title */
       .header {
         padding: 80px;
         text-align: center;

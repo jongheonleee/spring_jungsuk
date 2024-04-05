@@ -4,6 +4,7 @@
 <div class="navbar">
     <a href="<c:url value = '/'/>">홈</a>
     <a href="<c:url value ='/board/list'/>">글목록</a>
+    <a href="<c:url value ='/board/write?toURL=${ param.toURL }'/>">글쓰기</a>
     <a href="<c:url value = '/login/login?toURL=${ param.toURL }'/>">로그인</a>
     <a href="<c:url value = '/login/logout'/>" class="right">로그아웃</a>
 </div>

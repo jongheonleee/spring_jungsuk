@@ -23,7 +23,7 @@
 
   <insert id="insert" parameterType="BoardDTO">
     INSERT INTO BOARD(title, content, writer, view_cnt, comment_cnt, reg_date, up_date)
-    VALUES(#{title}, #{content}, #{writer}, #{view_cnt}, #{comment_cnt}, #{reg_date}, #{up_date})
+    VALUES(#{title}, #{content}, #{writer}, #{view_cnt}, #{comment_cnt}, now(), now())
   </insert>
 
   <select id="selectAll" resultType="BoardDTO">
@@ -39,9 +39,7 @@
 
   <update id="update" parameterType="BoardDTO">
     UPDATE BOARD
-    SET title = #{title}, content = #{content}, writer = #{writer},
-        view_cnt = #{view_cnt}, comment_cnt = #{comment_cnt},
-        reg_date = #{reg_date},up_date = #{up_date}
+    SET title = #{title}, content = #{content}, writer = #{writer}, Up_date = now()
     WHERE bno = #{bno}
   </update>
 
