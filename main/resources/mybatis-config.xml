@@ -7,7 +7,8 @@
   <typeAliases>
     <typeAlias alias="TmpUser" type="com.fastcampus.web3.dto.TmpUserDTO"/>
     <typeAlias alias="UserDTO" type="com.fastcampus.web3.dto.UserDTO"/>
-    <typeAlias alias="BoardDTO" type="com.fastcampus.web3.dto.BoardDTO"></typeAlias>
+    <typeAlias alias="BoardDTO" type="com.fastcampus.web3.dto.BoardDTO"/>
+    <typeAlias alias="CommentDTO" type="com.fastcampus.web3.dto.CommentDTO"/>
   </typeAliases>
 
 </configuration>

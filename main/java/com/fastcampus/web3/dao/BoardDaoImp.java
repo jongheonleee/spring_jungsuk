@@ -1,11 +1,13 @@
 package com.fastcampus.web3.dao;
 
 import com.fastcampus.web3.dto.BoardDTO;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class BoardDaoImp implements BoardDao {
@@ -58,5 +60,13 @@ public class BoardDaoImp implements BoardDao {
     @Override
     public List<BoardDTO> selectPage(Map map) throws Exception {
         return session.selectList(namespace + "selectPage", map);
+    }
+
+    @Override
+    public int updateCommentCnt(Integer bno, Integer cnt) throws Exception {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("bno", bno);
+        map.put("cnt", cnt);
+        return session.update(namespace + "updateCommentCnt", map);
     }
 }

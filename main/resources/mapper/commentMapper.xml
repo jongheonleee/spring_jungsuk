@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fastcampus.web3.dao.CommentMapper">
+  <!--  전체 댓글 조회 상수로 활용-->
+  <sql id = "selectComment">
+    SELECT *
+    FROM COMMENT
+  </sql>
+
+  <!--  📌 전체 댓글 수 카운트 -->
+  <select id="countAll" resultType="Integer">
+    SELECT COUNT(*)
+    FROM COMMENT
+  </select>
+
+  <!--  📌 특정 게시물의 댓글 수 카운트 -->
+  <select id="count" parameterType="CommentDTO" resultType="Integer">
+    SELECT COUNT(*)
+    FROM COMMENT
+    WHERE bno = #{bno}
+  </select>
+
+
+
+  <!--  📌 댓글 생성  -->
+  <insert id="insert" parameterType="CommentDTO">
+    INSERT INTO COMMENT(cno, bno, writer, content, reg_date, up_date)
+    VALUES(#{cno}, #{bno}, #{writer}, #{content}, now(), now())
+  </insert>
+
+  <!--  📌 특정 게시물의 특정 댓글 조회 -->
+  <select id="select" parameterType="CommentDTO" resultType="CommentDTO">
+    <include refid="selectComment"/>
+    WHERE cno = #{cno} AND bno = #{bno}
+  </select>
+
+  <!--  📌 특정 게시물의 모든 댓글 조회 -->
+  <select id="selectAll" parameterType="CommentDTO" resultType="CommentDTO">
+    <include refid="selectComment"/>
+    WHERE bno = #{bno}
+  </select>
+
+
+  <!--  📌 특정 댓글 수정 -->
+  <update id="update" parameterType="CommentDTO">
+    UPDATE COMMENT
+    SET writer = #{writer}, content = #{content}, up_date = now()
+    WHERE cno = #{cno} AND bno = #{bno}
+  </update>
+
+  <!--  📌 특정 댓글 삭제 -->
+  <delete id="delete" parameterType="CommentDTO">
+    DELETE FROM COMMENT
+    WHERE bno = #{bno} AND cno = #{cno}
+  </delete>
+
+  <!--  📌 특정 게시글의 댓글 모두 삭제 -->
+  <delete id="deleteAll" parameterType="Integer">
+    DELETE FROM COMMENT
+    WHERE bno = #{bno}
+  </delete>
+</mapper>
