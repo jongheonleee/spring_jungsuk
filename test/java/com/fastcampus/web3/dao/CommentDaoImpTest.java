@@ -396,8 +396,6 @@ public class CommentDaoImpTest extends TestCase {
 
 
 
-
-
     // 1-3. insert ✅
         // 1-3-0. 1
         // 1-3-1. 10
@@ -440,7 +438,7 @@ public class CommentDaoImpTest extends TestCase {
     }
     @Test
     public void insertOneHundredDataTest() throws Exception {
-        // given & when :
+        // given & when : clean table
         // do :
         // assert(compare) :
         cleanDB();

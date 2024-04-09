@@ -4,7 +4,9 @@ package com.fastcampus.web3.service;
 import com.fastcampus.web3.dao.BoardDao;
 import com.fastcampus.web3.dao.CommentDao;
 import com.fastcampus.web3.dto.CommentDTO;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,14 +34,22 @@ public class CommentServiceImp implements CommentService{
         commentDTO.setCno(cno);
         commentDTO.setBno(bno);
         commentDTO.setWriter(writer);
-//        boardDao.decreaseCommentCnt(); 해당 게시글 댓글 수 증가
 
+        Map<String, Integer> map = new HashMap<>();
+        map.put("cno", cno);
+        map.put("cnt", -1);
+
+        boardDao.updateCommentCnt(map);
         return commentDao.delete(commentDTO);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int write(CommentDTO commentDTO) throws Exception {
-//        boardDao.incrementCommentCnt(commentDTO.getBno()); 해당 게시글 댓글 수 증가
+        Map<String, Integer> map = new HashMap<>();
+        map.put("bno", commentDTO.getCno());
+        map.put("cnt", 1);
+        boardDao.updateCommentCnt(map);
         return commentDao.insert(commentDTO);
     }
 

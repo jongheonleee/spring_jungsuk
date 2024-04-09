@@ -57,16 +57,14 @@ public class BoardDaoImp implements BoardDao {
         return session.update(namespace + "incrementViewCnt", bno);
     }
 
+
     @Override
     public List<BoardDTO> selectPage(Map map) throws Exception {
         return session.selectList(namespace + "selectPage", map);
     }
 
     @Override
-    public int updateCommentCnt(Integer bno, Integer cnt) throws Exception {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("bno", bno);
-        map.put("cnt", cnt);
+    public int updateCommentCnt(Map map) throws Exception {
         return session.update(namespace + "updateCommentCnt", map);
     }
 }
