@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDaoImp implements UserDao {
 
-    private static String namespace = "com.fastcampus.web3.dao.userMapper.";
+    private static String namespace = "com.fastcampus.web3.dao.UserMapper.";
     @Autowired
     private SqlSession session;
 

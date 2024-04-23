@@ -26,7 +26,7 @@ public class BoardServiceImpTest extends TestCase {
     @Test
     public void testDSDI() {
         assertTrue(ds != null);
-        assertTrue(ds instanceof  DataSource);
+        assertTrue(ds instanceof DataSource);
     }
 
     @Test

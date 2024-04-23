@@ -517,7 +517,7 @@ public class UserDaoImpTest extends TestCase {
     @Test
     public void deleteUserTestForTenTimes() throws Exception {
         // 밑에 과정 10번 반복
-            // given & when : 테이블 초기화 및 데이터 생성
+            // given & when :8 테이블 초기화 및 데이터 생성
             // do : dao를 통해 저장한 데이터 조회후 삭제
             // assert(compare) : 예상 결과와 실제 결과 비교
         cleanDB();

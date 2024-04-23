@@ -2,7 +2,6 @@ package com.fastcampus.web3.domain;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
-// 📌 나중에 이넘으로 변환
 public class PageHandler {
 
     public final int NAV_SIZE = 10;

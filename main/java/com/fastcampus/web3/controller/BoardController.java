@@ -40,7 +40,6 @@ public class BoardController {
         // 페이지 핸들러 계산
         // 에러 처리
         if (!isSession(session)) {
-            System.out.println(request.getServletPath());
             return "redirect:/login/login?toURL="+request.getServletPath();
         }
 
@@ -51,9 +50,6 @@ public class BoardController {
             int totalCnt = boardService.getCount();
             System.out.println(currPage + ", " + pageSize);
             List<BoardDTO> list = boardService.getPage(currPage, pageSize);
-//            for (BoardDTO boardDTO : list) {
-//                System.out.println(boardDTO.getBno());
-//            }
             PageHandler ph = new PageHandler(currPage, totalCnt);
             model.addAttribute("ph", ph);
             model.addAttribute("list", list);
