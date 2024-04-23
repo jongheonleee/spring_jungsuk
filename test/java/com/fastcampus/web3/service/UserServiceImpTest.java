@@ -100,7 +100,6 @@ public class UserServiceImpTest extends TestCase {
         assertTrue(1000 == actualCnt);
     }
 
-
         // 1-1. 특정 유저 조회
             // 1-1-0. 해당 아이디가 없는 경우, null
             // 1-1-1. 1명 중에 1명 찾음

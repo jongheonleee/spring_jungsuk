@@ -852,6 +852,7 @@ public class BoardServiceImpTest extends TestCase {
         for (int i=0; i<5; i++) {
             int randomIdx = (int)(Math.random() * 1000) + 1;
             BoardDTO updateData = createUpdateData(randomIdx);
+
             int actualRowCnt = boardService.modify(updateData);
             BoardDTO target = boardService.read(randomIdx);
 
