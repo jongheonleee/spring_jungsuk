@@ -1,7 +1,7 @@
 package com.fastcampus.web3.service;
 
 import com.fastcampus.web3.dao.UserDao;
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +18,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO find(String id) throws Exception {
+    public UserDto find(String id) throws Exception {
         return dao.select(id);
     }
 
     @Override
-    public List<UserDTO> findAll() throws Exception {
+    public List<UserDto> findAll() throws Exception {
         return dao.selectAll();
     }
 
@@ -33,12 +33,12 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public int register(UserDTO userDTO) throws Exception {
+    public int register(UserDto userDTO) throws Exception {
         return dao.insert(userDTO);
     }
 
     @Override
-    public int update(UserDTO userDTO) throws Exception {
+    public int update(UserDto userDTO) throws Exception {
         return dao.update(userDTO);
     }
 

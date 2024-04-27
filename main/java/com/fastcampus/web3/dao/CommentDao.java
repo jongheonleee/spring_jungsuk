@@ -2,6 +2,7 @@ package com.fastcampus.web3.dao;
 
 import com.fastcampus.web3.dto.CommentDto;
 import java.util.List;
+import java.util.Map;
 
 public interface CommentDao {
 

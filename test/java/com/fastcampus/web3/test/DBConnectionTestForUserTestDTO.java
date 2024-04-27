@@ -1,6 +1,6 @@
 package com.fastcampus.web3.test;
 
-import com.fastcampus.web3.dto.TmpUserDTO;
+import com.fastcampus.web3.dto.TmpUserDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,7 +56,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
     @DisplayName("test_user -> insert")
     public void insertUserTest() throws Exception {
         deleteAll();
-        TmpUserDTO user = new TmpUserDTO("1", "aa", "aa");
+        TmpUserDto user = new TmpUserDto("1", "aa", "aa");
         int rowCnt = insertUser(user);
         assertTrue(rowCnt == 1);
     }
@@ -65,7 +65,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
     @DisplayName("test_user -> select")
     public void selectUserTest() throws Exception {
         deleteAll();
-        TmpUserDTO user = new TmpUserDTO("1", "1234", "dw");
+        TmpUserDto user = new TmpUserDto("1", "1234", "dw");
 
         int rowCnt = insertUser(user);
 
@@ -79,12 +79,12 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
     public void updateUserTest() throws Exception  {
         deleteAll();
 
-        TmpUserDTO user = new TmpUserDTO("1", "asdf", "1234");
+        TmpUserDto user = new TmpUserDto("1", "asdf", "1234");
         insertUser(user);
 
-        TmpUserDTO updatedUser = new TmpUserDTO("1", "asdf2", "1234");
+        TmpUserDto updatedUser = new TmpUserDto("1", "asdf2", "1234");
         updateUser(updatedUser);
-        TmpUserDTO user2 = selectUser(updatedUser.getId());
+        TmpUserDto user2 = selectUser(updatedUser.getId());
 
         System.out.println("user.toString().equals(user2.toString()) = " + user.toString().equals(user2.toString()));
         System.out.println("updatedUser.toString() = " + updatedUser);
@@ -100,7 +100,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
         int rowCnt = deleteUser("1");
         assertTrue(rowCnt == 0);
 
-        TmpUserDTO user = new TmpUserDTO("1", "asdf", "1234");
+        TmpUserDto user = new TmpUserDto("1", "asdf", "1234");
         rowCnt = insertUser(user);
         assertTrue(rowCnt == 1);
 
@@ -109,7 +109,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
         assertTrue(selectUser(user.getId()) == null);
     }
 
-    public int insertUser(TmpUserDTO user) throws Exception {
+    public int insertUser(TmpUserDto user) throws Exception {
         Connection conn = ds.getConnection();
 
         String sql = "insert into user_test values (?, ?, ?)";
@@ -135,7 +135,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
     }
 
 
-    public TmpUserDTO selectUser(String id) throws Exception {
+    public TmpUserDto selectUser(String id) throws Exception {
         Connection conn = ds.getConnection();
 
         String sql = "select * from user_test where id = ?";
@@ -146,7 +146,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
 
         // 쿼리 결과가 있으면 값을 채워서 반환한다.
         if (rs.next()) {
-            TmpUserDTO user = new TmpUserDTO();
+            TmpUserDto user = new TmpUserDto();
             user.setId(rs.getString(1));
 //            user.setPwd(rs.getString(2));
 //            user.setName(rs.getString(3));
@@ -168,7 +168,7 @@ public class DBConnectionTestForUserTestDTO extends TestCase {
         return pstmt.executeUpdate(); // insert, update, delete
     }
 
-    public int updateUser(TmpUserDTO user) throws Exception {
+    public int updateUser(TmpUserDto user) throws Exception {
         Connection conn = ds.getConnection();
 
         String sql = "update user_test set user_name = ?, user_pwd = ? where id = ?";

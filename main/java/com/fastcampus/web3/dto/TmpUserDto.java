@@ -1,14 +1,14 @@
 package com.fastcampus.web3.dto;
 
-public class TmpUserDTO {
+public class TmpUserDto {
 
     private String id;
     private String user_name;
     private String user_pwd;
 
-    public TmpUserDTO() {};
+    public TmpUserDto() {};
 
-    public TmpUserDTO(String id, String user_name, String user_pwd) {
+    public TmpUserDto(String id, String user_name, String user_pwd) {
         this.id = id;
         this.user_name = user_name;
         this.user_pwd = user_pwd;

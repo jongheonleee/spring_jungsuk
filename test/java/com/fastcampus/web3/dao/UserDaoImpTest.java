@@ -1,7 +1,7 @@
 package com.fastcampus.web3.dao;
 
 
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -99,7 +99,7 @@ public class UserDaoImpTest extends TestCase {
     public void countOneData() throws Exception {
         // given & when : 테이블 초기화 및 데이터 1개 추가
         cleanDB();
-        UserDTO createdUser = new UserDTO("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto createdUser = new UserDto("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
         int expectedRowCnt = 1;
 
         // do : dao로 로우수 카운트
@@ -117,7 +117,7 @@ public class UserDaoImpTest extends TestCase {
         int expectedRowCnt = 10;
 
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -137,7 +137,7 @@ public class UserDaoImpTest extends TestCase {
         int expectedRowCnt = 100;
 
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -155,7 +155,7 @@ public class UserDaoImpTest extends TestCase {
         int expectedRowCnt = 1000;
 
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -172,7 +172,7 @@ public class UserDaoImpTest extends TestCase {
     public void insertUserTestForOneTime() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        UserDTO userDTO = new UserDTO("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto userDTO = new UserDto("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
         int expectedRowCnt = 1;
 
         // do : dao를 통해 데이터 저장
@@ -193,7 +193,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=10; i++) {
-            UserDTO userDTO = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto userDTO = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             int expectedRowCnt = 1;
             int actualRowCnt = userDao.insert(userDTO);
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -210,7 +210,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=100; i++) {
-            UserDTO userDTO = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto userDTO = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             int expectedRowCnt = 1;
             int actualRowCnt = userDao.insert(userDTO);
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -226,7 +226,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=1000; i++) {
-            UserDTO userDTO = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto userDTO = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             int expectedRowCnt = 1;
             int actualRowCnt = userDao.insert(userDTO);
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -239,7 +239,7 @@ public class UserDaoImpTest extends TestCase {
         // do : 없는데이터 조회
         // assert(compare) : null 조회
         cleanDB();
-        UserDTO selectedUser = userDao.select("1");
+        UserDto selectedUser = userDao.select("1");
         assertTrue(selectedUser == null);
 
     }
@@ -249,11 +249,11 @@ public class UserDaoImpTest extends TestCase {
     public void selectUserTestForOneTime() throws Exception {
         // given & when :
         cleanDB();
-        UserDTO createdUser = new UserDTO("1", "1234", "testUser"+1, "testEmail"+1, null, "fn", null);
+        UserDto createdUser = new UserDto("1", "1234", "testUser"+1, "testEmail"+1, null, "fn", null);
         insertDataByJdbc(createdUser);
 
         // do : dao를 통해서 데이터 조회(id)
-        UserDTO selectedUser = userDao.select("1");
+        UserDto selectedUser = userDao.select("1");
 
         // assert(compare) : 내가 생성한 객체의 iv와 DB에서 조회된 iv 비교
         assertTrue(selectedUser.getId().equals(createdUser.getId()));
@@ -270,10 +270,10 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=10; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             insertDataByJdbc(createdUser);
 
-            UserDTO selectedUser = userDao.select(""+i);
+            UserDto selectedUser = userDao.select(""+i);
 
             assertTrue(selectedUser.getId().equals(createdUser.getId()));
             assertTrue(selectedUser.getName().equals(createdUser.getName()));
@@ -290,10 +290,10 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=100; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             insertDataByJdbc(createdUser);
 
-            UserDTO selectedUser = userDao.select(""+i);
+            UserDto selectedUser = userDao.select(""+i);
 
             assertTrue(selectedUser.getId().equals(createdUser.getId()));
             assertTrue(selectedUser.getName().equals(createdUser.getName()));
@@ -310,10 +310,10 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=1000; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             insertDataByJdbc(createdUser);
 
-            UserDTO selectedUser = userDao.select(""+i);
+            UserDto selectedUser = userDao.select(""+i);
 
             assertTrue(selectedUser.getId().equals(createdUser.getId()));
             assertTrue(selectedUser.getName().equals(createdUser.getName()));
@@ -325,14 +325,14 @@ public class UserDaoImpTest extends TestCase {
     public void updateUserTestForOneTime() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성(저장용 데이터, 수정용 데이터)
         cleanDB();
-        UserDTO createdUser = new UserDTO("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
-        UserDTO createdUserForUpdate = new UserDTO("1", "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto createdUser = new UserDto("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto createdUserForUpdate = new UserDto("1", "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
         int expectedRowCnt = 1;
 
         // do : dao를 통해 저장용 데이터 저장 및 수정용 데이터 내용으로 수정
         userDao.insert(createdUser);
         int actualRowCnt = userDao.update(createdUserForUpdate);
-        UserDTO selectedUser = userDao.select(""+1);
+        UserDto selectedUser = userDao.select(""+1);
 
         // assert(compare) : 예상 결과와 실제 결과 비교
         assertTrue(expectedRowCnt == actualRowCnt);
@@ -347,13 +347,13 @@ public class UserDaoImpTest extends TestCase {
     public void selectAllTestForOneUser() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        UserDTO createdUser = new UserDTO("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto createdUser = new UserDto("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
         int expectedLength = 1;
 
         // do : dao를 통해 모든 데이터 조회
         userDao.insert(createdUser);
-        List<UserDTO> userDTOS = userDao.selectAll();
-        int actualLength = userDTOS.size();
+        List<UserDto> userDtos = userDao.selectAll();
+        int actualLength = userDtos.size();
 
         // assert(compare) : 기대값과 실제값 결과 비교
         assertTrue(expectedLength == actualLength);
@@ -366,13 +366,13 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
         int expectedLength = 10;
         for (int i=1; i<=expectedLength; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
         // do : dao를 통해 모든 데이터 조회
-        List<UserDTO> userDTOS = userDao.selectAll();
-        int actualLength = userDTOS.size();
+        List<UserDto> userDtos = userDao.selectAll();
+        int actualLength = userDtos.size();
 
         // assert(compare) : 기대값과 실제값 비교
         assertTrue(expectedLength == actualLength);
@@ -386,13 +386,13 @@ public class UserDaoImpTest extends TestCase {
         int expectedLength = 100;
 
         for (int i=1; i<=expectedLength; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
         // do : dao를 통해 모든 데이터 조회
-        List<UserDTO> userDTOS = userDao.selectAll();
-        int actualLength = userDTOS.size();
+        List<UserDto> userDtos = userDao.selectAll();
+        int actualLength = userDtos.size();
 
         // assert(compare) : 기대값과 실제값 비교
         assertTrue(expectedLength == actualLength);
@@ -406,13 +406,13 @@ public class UserDaoImpTest extends TestCase {
         int expectedLength = 1000;
 
         for (int i=1; i<=expectedLength; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
         // do : dao를 통해 모든 데이터 조회
-        List<UserDTO> userDTOS = userDao.selectAll();
-        int actualLength = userDTOS.size();
+        List<UserDto> userDtos = userDao.selectAll();
+        int actualLength = userDtos.size();
 
         // assert(compare) : 기대값과 실제값 비교
         assertTrue(expectedLength == actualLength);
@@ -428,14 +428,14 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=10; i++) {
-            UserDTO createdUser = new UserDTO("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
-            UserDTO createdUserForUpdate = new UserDTO("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUserForUpdate = new UserDto("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
 
             int expectedRowCnt = 1;
 
             userDao.insert(createdUser);
             int actualRowCnt = userDao.update(createdUserForUpdate);
-            UserDTO selectedUser = userDao.select(""+i);
+            UserDto selectedUser = userDao.select(""+i);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -454,14 +454,14 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=100; i++) {
-            UserDTO createdUser = new UserDTO("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
-            UserDTO createdUserForUpdate = new UserDTO("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUserForUpdate = new UserDto("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
 
             int expectedRowCnt = 1;
 
             userDao.insert(createdUser);
             int actualRowCnt = userDao.update(createdUserForUpdate);
-            UserDTO selectedUser = userDao.select(""+i);
+            UserDto selectedUser = userDao.select(""+i);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -480,14 +480,14 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=1000; i++) {
-            UserDTO createdUser = new UserDTO("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
-            UserDTO createdUserForUpdate = new UserDTO("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto("" + i, "1234", "testUser"+i, "testEmail"+i, new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUserForUpdate = new UserDto("" + i, "12345", "testUser12", "testEmail12", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
 
             int expectedRowCnt = 1;
 
             userDao.insert(createdUser);
             int actualRowCnt = userDao.update(createdUserForUpdate);
-            UserDTO selectedUser = userDao.select("" + i);
+            UserDto selectedUser = userDao.select("" + i);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -501,13 +501,13 @@ public class UserDaoImpTest extends TestCase {
     public void deleteUserTestForOneTime() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        UserDTO createdUser = new UserDTO(""+1, "1234", "testUser"+1, "testEmail"+1, null, "fn", null);
+        UserDto createdUser = new UserDto(""+1, "1234", "testUser"+1, "testEmail"+1, null, "fn", null);
         int expectedRowCnt = 1;
 
         // do : dao를 통해 저장한 데이터 조회후 삭제
         userDao.insert(createdUser);
         int actualRowCnt = userDao.delete(createdUser.getId());
-        UserDTO selectedUser = userDao.select(createdUser.getId());
+        UserDto selectedUser = userDao.select(createdUser.getId());
 
         // assert(compare) : 예상 결과와 실제 결과 비교
         assertTrue(expectedRowCnt == actualRowCnt);
@@ -523,13 +523,13 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=10; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             int expectedRowCnt = 1;
 
             // do : dao를 통해 저장한 데이터 조회후 삭제
             userDao.insert(createdUser);
             int actualRowCnt = userDao.delete(createdUser.getId());
-            UserDTO selectedUser = userDao.select(createdUser.getId());
+            UserDto selectedUser = userDao.select(createdUser.getId());
 
             // assert(compare) : 예상 결과와 실제 결과 비교
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -547,13 +547,13 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=100; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             int expectedRowCnt = 1;
 
             // do : dao를 통해 저장한 데이터 조회후 삭제
             userDao.insert(createdUser);
             int actualRowCnt = userDao.delete(createdUser.getId());
-            UserDTO selectedUser = userDao.select(createdUser.getId());
+            UserDto selectedUser = userDao.select(createdUser.getId());
 
             // assert(compare) : 예상 결과와 실제 결과 비교
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -570,13 +570,13 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
 
         for (int i=1; i<=1000; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser"+i, "testEmail"+i, null, "fn", null);
             int expectedRowCnt = 1;
 
             // do : dao를 통해 저장한 데이터 조회후 삭제
             userDao.insert(createdUser);
             int actualRowCnt = userDao.delete(createdUser.getId());
-            UserDTO selectedUser = userDao.select(createdUser.getId());
+            UserDto selectedUser = userDao.select(createdUser.getId());
 
             // assert(compare) : 예상 결과와 실제 결과 비교
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -588,7 +588,7 @@ public class UserDaoImpTest extends TestCase {
     public void deleteAllTestForOneUser() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        UserDTO createdUser = new UserDTO("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+        UserDto createdUser = new UserDto("1", "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
         int expectedRowCnt = 1;
 
         // do : dao를 통해 모든 데이터 조회
@@ -606,7 +606,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 10;
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -624,7 +624,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 100;
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -642,7 +642,7 @@ public class UserDaoImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 1000;
         for (int i=1; i<=expectedRowCnt; i++) {
-            UserDTO createdUser = new UserDTO(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
+            UserDto createdUser = new UserDto(""+i, "1234", "testUser1", "testEmail1", new java.sql.Date(new Date(24).getTime()), "fn", new java.sql.Date(new Date(24).getTime()));
             userDao.insert(createdUser);
         }
 
@@ -664,7 +664,7 @@ public class UserDaoImpTest extends TestCase {
 
     }
 
-    public int insertDataByJdbc(UserDTO userDTO) throws Exception {
+    public int insertDataByJdbc(UserDto userDTO) throws Exception {
         String sql = "insert into user_info values (?, ?, ?, ?, now(), ?, now())";
         Connection conn = ds.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql);

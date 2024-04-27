@@ -3,20 +3,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fastcampus.web3.dao.CommentMapper">
+  <!-- 0. 모든 댓글을 삭제 -->
   <delete id="deleteAll" parameterType="int">
     DELETE FROM comment
     WHERE  bno = #{bno}
   </delete>
 
+  <!-- 1. 모든 댓글 카운트 -->
   <select id="count" parameterType="int" resultType="int">
     SELECT count(*) FROM comment
     WHERE  bno = #{bno}
   </select>
 
+  <!-- 2. 특정 댓글을 삭제, 이때 작성자 이름까지 확인-->
   <delete id="delete" parameterType="map">
     DELETE FROM comment WHERE cno = #{cno} AND commenter = #{commenter}
   </delete>
 
+  <!-- 3. 댓글 추가 -->
   <insert id="insert" parameterType="CommentDto">
     INSERT INTO comment
       (bno, pcno, comment, commenter, reg_date, up_date)
@@ -24,6 +28,7 @@
       (#{bno}, #{pcno}, #{comment}, #{commenter}, now(), now())
   </insert>
 
+  <!-- 4. 모든 댓글 조회, 등록 시기와 번호가 빠른 것부터 조회 -->
   <select id="selectAll" parameterType="int" resultType="CommentDto">
     SELECT cno, bno, pcno, comment, commenter, reg_date, up_date
     FROM comment
@@ -31,12 +36,14 @@
     ORDER BY reg_date ASC, cno ASC
   </select>
 
+  <!-- 5. 특정 댓글 조회 -->
   <select id="select" parameterType="int" resultType="CommentDto">
     SELECT cno, bno, pcno, comment, commenter, reg_date, up_date
     FROM comment
     WHERE cno = #{cno}
   </select>
 
+  <!-- 특정 댓글 업데이트, 이때 댓글 번호와 작성자로 확인  -->
   <update id="update" parameterType="CommentDto">
     UPDATE comment
     SET comment = #{comment}

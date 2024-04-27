@@ -1,6 +1,6 @@
 package com.fastcampus.web3.test;
 
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -83,7 +83,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class UserDTOTest extends TestCase {
+public class UserDtoTest extends TestCase {
     @Autowired
     DataSource ds;
 
@@ -122,7 +122,7 @@ public class UserDTOTest extends TestCase {
     @Test
     public void insertUserTest() throws SQLException {
         cleanData();
-        UserDTO createdUserDTODTO = new UserDTO("asdf3", "1234", "abc", "aaa@aaa.com", new java.util.Date(), "fb", new java.util.Date());
+        UserDto createdUserDTODTO = new UserDto("asdf3", "1234", "abc", "aaa@aaa.com", new java.util.Date(), "fb", new java.util.Date());
         int rowCnt = insertData(createdUserDTODTO);
         assertTrue(1 == rowCnt);
     }
@@ -191,7 +191,7 @@ public class UserDTOTest extends TestCase {
     // 로우수 카운트
 
     // 기대한 값과 비교
-    private int insertData(UserDTO userDTO) throws SQLException {
+    private int insertData(UserDto userDTO) throws SQLException {
         Connection conn = ds.getConnection();
 
         String sql = "insert into user_info values (?, ?, ?, ?, ?, ?, now())";

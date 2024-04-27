@@ -1,6 +1,6 @@
 package com.fastcampus.web3.dao;
 
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public UserDTO select(String id) throws Exception {
+    public UserDto select(String id) throws Exception {
         return session.selectOne(namespace + "select", id);
     }
 
     @Override
-    public List<UserDTO> selectAll() throws Exception {
+    public List<UserDto> selectAll() throws Exception {
         return session.selectList(namespace + "selectAll");
     }
 
@@ -35,12 +35,12 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public int insert(UserDTO userDto) throws Exception {
+    public int insert(UserDto userDto) throws Exception {
         return session.insert(namespace + "insert", userDto);
     }
 
     @Override
-    public int update(UserDTO userDto) throws Exception {
+    public int update(UserDto userDto) throws Exception {
         return session.update(namespace + "update", userDto);
     }
 

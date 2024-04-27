@@ -1,6 +1,6 @@
 package com.fastcampus.web3.validator;
 
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -11,12 +11,12 @@ public class UserValidator implements Validator {
     private static final int MAX_LENGTH = 25;
     @Override
     public boolean supports(Class<?> clazz) {
-        return UserDTO.class.isAssignableFrom(clazz);
+        return UserDto.class.isAssignableFrom(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        UserDTO user = (UserDTO) target;
+        UserDto user = (UserDto) target;
         String id = user.getId();
         String pwd = user.getPwd();
 

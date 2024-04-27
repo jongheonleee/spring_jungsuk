@@ -1,7 +1,7 @@
 package com.fastcampus.web3.controller;
 
 import com.fastcampus.web3.validator.UserValidator;
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import com.fastcampus.web3.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +39,7 @@ public class RegisterController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid UserDTO user, BindingResult result, Model model) {
+    public String save(@Valid UserDto user, BindingResult result, Model model) {
         try {
             if (result.hasErrors()) {
                 List<ObjectError> errors = result.getAllErrors();

@@ -33,6 +33,14 @@ public class BoardDaoImpTest extends TestCase {
         assertTrue(ds instanceof DataSource);
     }
 
+
+    @Test
+    public void inserSomeData() throws Exception {
+        for (int i=1; i<=100; i++) {
+            BoardDto data = createTestData(i);
+            boardDao.insert(data);
+        }
+    }
     @Test
     public void checkDaoDI() {
         assertTrue(boardDao != null);

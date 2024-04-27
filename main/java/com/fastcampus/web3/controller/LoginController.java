@@ -1,7 +1,7 @@
 package com.fastcampus.web3.controller;
 
 
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import com.fastcampus.web3.service.UserService;
 import java.util.List;
 import javax.servlet.http.Cookie;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +52,7 @@ public class LoginController {
 
 
     private boolean isValid(String id, String pwd) throws Exception {
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         return users.stream()
                 .anyMatch(user -> user.getId().equals(id) && user.getPwd().equals(pwd));
     }

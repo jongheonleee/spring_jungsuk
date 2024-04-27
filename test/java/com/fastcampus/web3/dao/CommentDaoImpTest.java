@@ -12,13 +12,21 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class CommentDaoImplTest {
+public class CommentDaoImpTest {
     @Autowired
     CommentDao commentDao;
 
     @Test
     public void init() {
         assertTrue(commentDao != null);
+    }
+
+    @Test
+    public void insertSomeData() throws Exception {
+        for (int i=1; i<=100; i++) {
+            CommentDto data = new CommentDto(1, 1, "nice", "dd");
+            commentDao.insert(data);
+        }
     }
 
     @Test

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CommentDaoImpl implements CommentDao {
+public class CommentDaoImp implements CommentDao {
 
     @Autowired
     private SqlSession session;

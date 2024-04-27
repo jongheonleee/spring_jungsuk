@@ -1,7 +1,7 @@
 package com.fastcampus.web3.service;
 
 import com.fastcampus.web3.dao.UserDao;
-import com.fastcampus.web3.dto.UserDTO;
+import com.fastcampus.web3.dto.UserDto;
 import java.util.List;
 import javax.sql.DataSource;
 import junit.framework.TestCase;
@@ -112,7 +112,7 @@ public class UserServiceImpTest extends TestCase {
         // do : service로 없는 id 조회
         // assert(compare) : userDTO 내부 null
         cleanDB();
-        UserDTO found = service.find("1");
+        UserDto found = service.find("1");
         assertTrue(null == found);
     }
 
@@ -122,10 +122,10 @@ public class UserServiceImpTest extends TestCase {
         // do : service로 id 조회
         // assert(compare) : 조회된 dto와 생성한 dto 내용 비교
         cleanDB();
-        UserDTO created = createData(1);
+        UserDto created = createData(1);
         dao.insert(created);
 
-        UserDTO found = service.find("1");
+        UserDto found = service.find("1");
 
         assertTrue(created.equals(found));
     }
@@ -139,11 +139,11 @@ public class UserServiceImpTest extends TestCase {
         int size = 10;
         int checkCnt = 1;
         for (int i=1; i<=size; i++) {
-            UserDTO created = createData(i);
+            UserDto created = createData(i);
             dao.insert(created);
 
             if (i <= checkCnt) {
-                UserDTO found = service.find(String.valueOf(i));
+                UserDto found = service.find(String.valueOf(i));
                 assertTrue(created.equals(found));
             }
         }
@@ -158,11 +158,11 @@ public class UserServiceImpTest extends TestCase {
         int size = 100;
         int checkCnt = 15;
         for (int i=1; i<=size; i++) {
-            UserDTO created = createData(i);
+            UserDto created = createData(i);
             dao.insert(created);
 
             if (i <= checkCnt) {
-                UserDTO found = service.find(String.valueOf(i));
+                UserDto found = service.find(String.valueOf(i));
                 assertTrue(created.equals(found));
             }
         }
@@ -177,11 +177,11 @@ public class UserServiceImpTest extends TestCase {
         int size = 1000;
         int checkCnt = 25;
         for (int i=1; i<=size; i++) {
-            UserDTO created = createData(i);
+            UserDto created = createData(i);
             dao.insert(created);
 
             if (i <= checkCnt) {
-                UserDTO found = service.find(String.valueOf(i));
+                UserDto found = service.find(String.valueOf(i));
                 assertTrue(created.equals(found));
             }
         }
@@ -198,7 +198,7 @@ public class UserServiceImpTest extends TestCase {
         // do : service로 모든 유저 조회
         // assert(compare) : 길이 0
         cleanDB();
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         int actualLength = users.size();
         assertTrue(0 == actualLength);
     }
@@ -211,7 +211,7 @@ public class UserServiceImpTest extends TestCase {
         cleanDB();
         insertData(1);
 
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         int actualLength = users.size();
 
         assertTrue(1 == actualLength);
@@ -225,7 +225,7 @@ public class UserServiceImpTest extends TestCase {
         cleanDB();
         insertData(10);
 
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         int actualLength = users.size();
 
         assertTrue(10 == actualLength);
@@ -239,7 +239,7 @@ public class UserServiceImpTest extends TestCase {
         cleanDB();
         insertData(100);
 
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         int actualLength = users.size();
 
         assertTrue(100 == actualLength);
@@ -253,7 +253,7 @@ public class UserServiceImpTest extends TestCase {
         cleanDB();
         insertData(1000);
 
-        List<UserDTO> users = service.findAll();
+        List<UserDto> users = service.findAll();
         int actualLength = users.size();
 
         assertTrue(1000 == actualLength);
@@ -445,7 +445,7 @@ public class UserServiceImpTest extends TestCase {
         // do : service로 없는 유저 수정
         // assert(compare) : 적용로우수 0
         cleanDB();
-        UserDTO updated = createUpdateData(1);
+        UserDto updated = createUpdateData(1);
         int rowCnt = service.update(updated);
         assertTrue(0 == rowCnt);
     }
@@ -458,10 +458,10 @@ public class UserServiceImpTest extends TestCase {
         cleanDB();
         int size = 1;
         insertData(size);
-        UserDTO updated = createUpdateData(1);
+        UserDto updated = createUpdateData(1);
 
         int rowCnt = service.update(updated);
-        UserDTO found = service.find(String.valueOf(1));
+        UserDto found = service.find(String.valueOf(1));
 
         assertTrue(1 == rowCnt);
         assertTrue(updated.equals(found));
@@ -478,10 +478,10 @@ public class UserServiceImpTest extends TestCase {
         insertData(size);
 
         for (int i=1; i<=cnt; i++) {
-            UserDTO updated = createUpdateData(i);
+            UserDto updated = createUpdateData(i);
             int rowCnt = service.update(updated);
             assertTrue(1 == rowCnt);
-            UserDTO found = service.find(updated.getId());
+            UserDto found = service.find(updated.getId());
             assertTrue(updated.equals(found));
         }
     }
@@ -497,12 +497,12 @@ public class UserServiceImpTest extends TestCase {
         insertData(size);
 
         for (int i=1; i<=cnt; i++) {
-            UserDTO updated = createUpdateData(i);
+            UserDto updated = createUpdateData(i);
 
             int rowCnt = service.update(updated);
             assertTrue(1 == rowCnt);
 
-            UserDTO found = service.find(updated.getId());
+            UserDto found = service.find(updated.getId());
             assertTrue(updated.equals(found));
         }
     }
@@ -518,12 +518,12 @@ public class UserServiceImpTest extends TestCase {
         insertData(size);
 
         for (int i=1; i<=cnt; i++) {
-            UserDTO updated = createUpdateData(i);
+            UserDto updated = createUpdateData(i);
 
             int rowCnt = service.update(updated);
             assertTrue(1 == rowCnt);
 
-            UserDTO found = service.find(updated.getId());
+            UserDto found = service.find(updated.getId());
             assertTrue(updated.equals(found));
         }
     }
@@ -537,19 +537,19 @@ public class UserServiceImpTest extends TestCase {
 
     private void insertData(int amount) throws Exception {
         for (int i=1; i<=amount; i++) {
-            UserDTO user = createData(i);
+            UserDto user = createData(i);
             dao.insert(user);
         }
     }
 
-    private UserDTO createData(int i) {
-        UserDTO user = new UserDTO(String.valueOf(i), "1234", "user"+i, "user@mail.com", null, null, null);
+    private UserDto createData(int i) {
+        UserDto user = new UserDto(String.valueOf(i), "1234", "user"+i, "user@mail.com", null, null, null);
         return user;
     }
 
 
-    private UserDTO createUpdateData(int i) {
-        UserDTO user = new UserDTO(String.valueOf(i), "1234", "updatedUser"+i, "user@mail.com", null, null, null);
+    private UserDto createUpdateData(int i) {
+        UserDto user = new UserDto(String.valueOf(i), "1234", "updatedUser"+i, "user@mail.com", null, null, null);
         return user;
     }
 }

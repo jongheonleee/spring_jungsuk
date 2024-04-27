@@ -1,7 +1,7 @@
 package com.fastcampus.web3.dao;
 
-import com.fastcampus.web3.dto.TmpUserDTO;
+import com.fastcampus.web3.dto.TmpUserDto;
 
 public interface TmpUserDao {
-    TmpUserDTO selectUser(String id);
+    TmpUserDto selectUser(String id);
 }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImp implements CommentService {
 
 
     BoardDao boardDao;
@@ -19,7 +19,7 @@ public class CommentServiceImpl implements CommentService {
     CommentDao commentDao;
 
 
-    public CommentServiceImpl(CommentDao commentDao, BoardDao boardDao) {
+    public CommentServiceImp(CommentDao commentDao, BoardDao boardDao) {
         this.commentDao = commentDao;
         this.boardDao = boardDao;
     }
@@ -30,15 +30,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-
     @Transactional(rollbackFor = Exception.class)
     public int remove(Integer cno, Integer bno, String commenter) throws Exception {
         Map<String, Integer> map = new HashMap<>();
         map.put("bno", bno);
         map.put("cnt", -1);
         int rowCnt = boardDao.updateCommentCnt(map);
+
         System.out.println("updateCommentCnt - rowCnt = " + rowCnt);
-//        throw new Exception("test");
         rowCnt = commentDao.delete(cno, commenter);
         System.out.println("rowCnt = " + rowCnt);
         return rowCnt;

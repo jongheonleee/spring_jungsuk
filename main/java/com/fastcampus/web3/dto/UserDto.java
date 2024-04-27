@@ -3,7 +3,7 @@ package com.fastcampus.web3.dto;
 import java.util.Date;
 import java.util.Objects;
 
-public class UserDTO {
+public class UserDto {
     private String id;
     private String pwd;
     private String name;
@@ -12,7 +12,7 @@ public class UserDTO {
     private String sns;
     private Date reg_date;
 
-    public UserDTO() {
+    public UserDto() {
 
     }
 
@@ -24,7 +24,7 @@ public class UserDTO {
         this.sns = sns;
     }
 
-    public UserDTO(String id, String pwd, String name, String email, Date birth, String sns, Date reg_date) {
+    public UserDto(String id, String pwd, String name, String email, Date birth, String sns, Date reg_date) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
@@ -38,7 +38,7 @@ public class UserDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDTO userDTO = (UserDTO) o;
+        UserDto userDTO = (UserDto) o;
         return id.equals(userDTO.id) && Objects.equals(pwd, userDTO.pwd) && Objects.equals(name, userDTO.name) && Objects.equals(email, userDTO.email) && Objects.equals(birth, userDTO.birth) && Objects.equals(sns, userDTO.sns);
     }
 
