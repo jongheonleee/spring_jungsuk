@@ -1,6 +1,6 @@
 package com.fastcampus.web3.dao;
 
-import com.fastcampus.web3.dto.BoardDTO;
+import com.fastcampus.web3.dto.BoardDto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
@@ -119,7 +119,7 @@ public class BoardDaoImpTest extends TestCase {
     public void countOneData() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         int expectedRowCnt = 1;
 
         // do : 데이터 저장 및 로우수 카운트
@@ -139,7 +139,7 @@ public class BoardDaoImpTest extends TestCase {
 
         // do : 데이터 저장 및 로우수 카운트
         for (int i=1; i<=expectedRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         int actualRowCnt = boardDao.count();
@@ -158,7 +158,7 @@ public class BoardDaoImpTest extends TestCase {
 
         // do : 데이터 저장 및 로우수 카운트
         for (int i=1; i<=expectedRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         int actualRowCnt = boardDao.count();
@@ -176,7 +176,7 @@ public class BoardDaoImpTest extends TestCase {
 
         // do : 데이터 저장 및 로우수 카운트
         for (int i=1; i<=expectedRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         int actualRowCnt = boardDao.count();
@@ -190,12 +190,12 @@ public class BoardDaoImpTest extends TestCase {
     public void selectOneDataTest() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         int expectedRowCnt = 1;
 
         // do : 데이터 저장 및 반영된 로우수 카운트
         int actualRowCnt = boardDao.insert(createdBoard);
-        BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+        BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
         // assert(compare) : 기대값과 결과값 비교
         assertTrue(expectedRowCnt == actualRowCnt);
@@ -219,9 +219,9 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 10;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -247,9 +247,9 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 100;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -274,9 +274,9 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 1000;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -293,7 +293,7 @@ public class BoardDaoImpTest extends TestCase {
     public void insertOneDataTest() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         int expectedRowCnt = 1;
 
         // do : 데이터 저장 및 적용된 로우수 카운트
@@ -314,7 +314,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 10;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -333,7 +333,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 100;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -352,7 +352,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 1000;
 
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             int actualRowCnt = boardDao.insert(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -368,10 +368,10 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 1;
 
         // do : 데이터 저장 및 모든 데이터 조회
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         boardDao.insert(createdBoard);
-        List<BoardDTO> boardDTOS = boardDao.selectAll();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectAll();
+        int actualLength = boardDtos.size();
 
         // assert(compare) : 기대값과 결과값 비교
         assertTrue(expectedLength == actualLength);
@@ -387,12 +387,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
 
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectAll();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectAll();
+        int actualLength = boardDtos.size();
         assertTrue(expectedLength == actualLength);
     }
 
@@ -405,12 +405,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 100;
 
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectAll();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectAll();
+        int actualLength = boardDtos.size();
         assertTrue(expectedLength == actualLength);
     }
 
@@ -423,12 +423,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 1000;
 
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectAll();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectAll();
+        int actualLength = boardDtos.size();
         assertTrue(expectedLength == actualLength);
     }
 
@@ -436,13 +436,13 @@ public class BoardDaoImpTest extends TestCase {
     public void updateOneDataTest() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성(저장용, 수정용)
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
-        BoardDTO createdBoardForUpdate = createUpdateTestData(1);
+        BoardDto createdBoard = createTestData(1);
+        BoardDto createdBoardForUpdate = createUpdateTestData(1);
 
         // do : 데이터 저장 및 저장된 데이터 수정
         boardDao.insert(createdBoard);
         boardDao.update(createdBoardForUpdate);
-        BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+        BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
         // assert(compare) : 수정용 데이터와 저장된 데이터 비교
         assertTrue(createdBoardForUpdate.getTitle().equals(selectedBoard.getTitle()));
@@ -458,12 +458,12 @@ public class BoardDaoImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=10; i++) {
-            BoardDTO createdBoard = createTestData(i);
-            BoardDTO createdBoardForUpdate = createUpdateTestData(i);
+            BoardDto createdBoard = createTestData(i);
+            BoardDto createdBoardForUpdate = createUpdateTestData(i);
 
             boardDao.insert(createdBoard);
             boardDao.update(createdBoardForUpdate);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(createdBoardForUpdate.getTitle().equals(selectedBoard.getTitle()));
             assertTrue(createdBoardForUpdate.getContent().equals(selectedBoard.getContent()));
@@ -480,12 +480,12 @@ public class BoardDaoImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=100; i++) {
-            BoardDTO createdBoard = createTestData(i);
-            BoardDTO createdBoardForUpdate = createUpdateTestData(i);
+            BoardDto createdBoard = createTestData(i);
+            BoardDto createdBoardForUpdate = createUpdateTestData(i);
 
             boardDao.insert(createdBoard);
             boardDao.update(createdBoardForUpdate);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(createdBoardForUpdate.getTitle().equals(selectedBoard.getTitle()));
             assertTrue(createdBoardForUpdate.getContent().equals(selectedBoard.getContent()));
@@ -502,12 +502,12 @@ public class BoardDaoImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdBoard = createTestData(i);
-            BoardDTO createdBoardForUpdate = createUpdateTestData(i);
+            BoardDto createdBoard = createTestData(i);
+            BoardDto createdBoardForUpdate = createUpdateTestData(i);
 
             boardDao.insert(createdBoard);
             boardDao.update(createdBoardForUpdate);
-            BoardDTO selectedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto selectedBoard = boardDao.select(createdBoard.getBno());
 
             assertTrue(createdBoardForUpdate.getTitle().equals(selectedBoard.getTitle()));
             assertTrue(createdBoardForUpdate.getContent().equals(selectedBoard.getContent()));
@@ -520,13 +520,13 @@ public class BoardDaoImpTest extends TestCase {
     public void deleteOneDataTest() throws Exception {
         // given & when : 테이블 초기화 및 데이터 생성
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         int expectedRowCnt = 1;
 
         // do : dao를 통해 데이터 저장 및 삭제
         boardDao.insert(createdBoard);
         int actualRowCnt = boardDao.delete(createdBoard.getBno());
-        BoardDTO deletedBoard = boardDao.select(createdBoard.getBno());
+        BoardDto deletedBoard = boardDao.select(createdBoard.getBno());
 
         // assert(compare) : 적용된 로우수 및 조회했을 때 null 나오는지 확인
         assertTrue(expectedRowCnt == actualRowCnt);
@@ -543,10 +543,10 @@ public class BoardDaoImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=10; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
             int actualRowCnt = boardDao.delete(createdBoard.getBno());
-            BoardDTO deletedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto deletedBoard = boardDao.select(createdBoard.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedBoard == null);
         }
@@ -561,10 +561,10 @@ public class BoardDaoImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=100; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
             int actualRowCnt = boardDao.delete(createdBoard.getBno());
-            BoardDTO deletedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto deletedBoard = boardDao.select(createdBoard.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedBoard == null);
         }
@@ -579,10 +579,10 @@ public class BoardDaoImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
             int actualRowCnt = boardDao.delete(createdBoard.getBno());
-            BoardDTO deletedBoard = boardDao.select(createdBoard.getBno());
+            BoardDto deletedBoard = boardDao.select(createdBoard.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedBoard == null);
         }
@@ -592,7 +592,7 @@ public class BoardDaoImpTest extends TestCase {
     public void deleteAllOneDataTest() throws Exception {
         // given & when : 테이블 초가화 및 데이터 생성
         cleanDB();
-        BoardDTO createdBoard = createTestData(1);
+        BoardDto createdBoard = createTestData(1);
         int expectedRowCnt = 1;
         int expectedTotalRowCnt = 0;
 
@@ -616,7 +616,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=10; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         boardDao.deleteAll();
@@ -635,7 +635,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=100; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         boardDao.deleteAll();
@@ -653,7 +653,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdBoard = createTestData(i);
+            BoardDto createdBoard = createTestData(i);
             boardDao.insert(createdBoard);
         }
         boardDao.deleteAll();
@@ -683,11 +683,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedRowCnt = 1;
         int expectedViewCnt = 2;
 
-        BoardDTO testData = createTestData(1);
+        BoardDto testData = createTestData(1);
 
         boardDao.insert(testData);
         int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
-        BoardDTO target = boardDao.select(testData.getBno());
+        BoardDto target = boardDao.select(testData.getBno());
 
         assertTrue(expectedRowCnt == actualRowCnt);
         assertTrue(expectedViewCnt == target.getView_cnt());
@@ -704,11 +704,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
 
             boardDao.insert(testData);
             int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
-            BoardDTO target = boardDao.select(testData.getBno());
+            BoardDto target = boardDao.select(testData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(expectedViewCnt == target.getView_cnt());
@@ -727,7 +727,7 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
@@ -735,7 +735,7 @@ public class BoardDaoImpTest extends TestCase {
             int randomIdx = (int)(Math.random() * repeat) + 1;
             int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
 
-            BoardDTO target = boardDao.select(randomIdx);
+            BoardDto target = boardDao.select(randomIdx);
             if (target.getView_cnt() >= 2) continue;
 
             assertTrue(expectedRowCnt == actualRowCnt);
@@ -754,11 +754,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
 
             boardDao.insert(testData);
             int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
-            BoardDTO target = boardDao.select(testData.getBno());
+            BoardDto target = boardDao.select(testData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(expectedViewCnt == target.getView_cnt());
@@ -777,14 +777,14 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
         for (int i=1; i<=5; i++) {
             int randomIdx = (int)(Math.random() * repeat) + 1;
             int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
-            BoardDTO target = boardDao.select(randomIdx);
+            BoardDto target = boardDao.select(randomIdx);
 
             if (target.getView_cnt() >= 2) continue;
 
@@ -804,11 +804,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
 
             boardDao.insert(testData);
             int actualRowCnt = boardDao.incrementViewCnt(testData.getBno());
-            BoardDTO target = boardDao.select(testData.getBno());
+            BoardDto target = boardDao.select(testData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(expectedViewCnt == target.getView_cnt());
@@ -827,14 +827,14 @@ public class BoardDaoImpTest extends TestCase {
         int expectedViewCnt = 2;
 
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
         for (int i=1; i<=5; i++) {
             int randomIdx = (int)(Math.random() * repeat) + 1;
             int actualRowCnt = boardDao.incrementViewCnt(randomIdx);
-            BoardDTO target = boardDao.select(randomIdx);
+            BoardDto target = boardDao.select(randomIdx);
 
             if (target.getView_cnt() >= 2) continue;
 
@@ -852,8 +852,8 @@ public class BoardDaoImpTest extends TestCase {
         Map<String, Integer> map = createTestMap(0);
         int expectedLength = 0;
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -866,11 +866,11 @@ public class BoardDaoImpTest extends TestCase {
         cleanDB();
         int expectedLength = 1;
         Map<String, Integer> map = createTestMap(0);
-        BoardDTO testData = createTestData(1);
+        BoardDto testData = createTestData(1);
         boardDao.insert(testData);
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -885,12 +885,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(0);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -905,11 +905,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(-1);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
     }
 
 
@@ -923,12 +923,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(0);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -944,11 +944,11 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(-1);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
     }
 
 
@@ -962,12 +962,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(0);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -982,12 +982,12 @@ public class BoardDaoImpTest extends TestCase {
         int expectedLength = 10;
         Map<String, Integer> map = createTestMap(-1);
         for (int i=1; i<=repeat; i++) {
-            BoardDTO testData = createTestData(i);
+            BoardDto testData = createTestData(i);
             boardDao.insert(testData);
         }
 
-        List<BoardDTO> boardDTOS = boardDao.selectPage(map);
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardDao.selectPage(map);
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -1002,13 +1002,13 @@ public class BoardDaoImpTest extends TestCase {
         pstmt.executeUpdate();
     }
 
-    private BoardDTO createTestData(int i) {
-        BoardDTO createdBoard = new BoardDTO(i, "title1", "content1", "writer1", 1, 1, null, null);
+    private BoardDto createTestData(int i) {
+        BoardDto createdBoard = new BoardDto(i, "title1", "content1", "writer1", 1, 1, null, null);
         return createdBoard;
     }
 
-    private BoardDTO createUpdateTestData(int i) {
-        BoardDTO createdBoard = new BoardDTO(i, "title2", "content2", "writer2", 1, 1, null, null);
+    private BoardDto createUpdateTestData(int i) {
+        BoardDto createdBoard = new BoardDto(i, "title2", "content2", "writer2", 1, 1, null, null);
         return createdBoard;
     }
 

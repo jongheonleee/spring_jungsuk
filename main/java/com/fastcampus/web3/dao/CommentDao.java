@@ -1,20 +1,15 @@
 package com.fastcampus.web3.dao;
 
-
-import com.fastcampus.web3.dto.CommentDTO;
-import java.rmi.server.ExportException;
+import com.fastcampus.web3.dto.CommentDto;
 import java.util.List;
 
 public interface CommentDao {
 
-    int countAll() throws Exception;
     int count(Integer bno) throws Exception;
-    CommentDTO select(CommentDTO commentDTO) throws Exception;
-    List<CommentDTO> selectAll(Integer bno) throws Exception;
-    int insert(CommentDTO commentDTO) throws Exception;
-    int update(CommentDTO commentDTO) throws Exception;
-
-    int delete(CommentDTO commentDTO) throws Exception;
-
-    int deleteAll(Integer bno) throws Exception;
+    int deleteAll(Integer bno);
+    int delete(Integer cno, String commenter) throws Exception;
+    int insert(CommentDto dto) throws Exception;
+    List<CommentDto> selectAll(Integer bno) throws Exception;
+    CommentDto select(Integer cno) throws Exception;
+    int update(CommentDto dto) throws Exception;
 }

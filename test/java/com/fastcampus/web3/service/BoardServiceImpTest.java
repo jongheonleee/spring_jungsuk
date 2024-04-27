@@ -1,7 +1,7 @@
 package com.fastcampus.web3.service;
 
 import com.fastcampus.web3.dao.BoardDaoImp;
-import com.fastcampus.web3.dto.BoardDTO;
+import com.fastcampus.web3.dto.BoardDto;
 import java.util.List;
 import javax.sql.DataSource;
 import junit.framework.TestCase;
@@ -122,7 +122,7 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 예측 로우수와 실제 로우수 비교
         cleanDB();
         int expectedTotalRowCnt = 1;
-        BoardDTO createdBoard = createData(1);
+        BoardDto createdBoard = createData(1);
 
         boardService.write(createdBoard);
         int actualTotalRowCnt = boardService.getCount();
@@ -138,7 +138,7 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedTotalRowCnt = 10;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
@@ -155,7 +155,7 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedTotalRowCnt = 100;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
@@ -171,7 +171,7 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedTotalRowCnt = 1000;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
@@ -197,7 +197,7 @@ public class BoardServiceImpTest extends TestCase {
         // do : service를 통해 데이터 넣기
         // assert(compare) : 예측값과 실제값 비교
         cleanDB();
-        BoardDTO createdBoard = createData(1);
+        BoardDto createdBoard = createData(1);
         int expectedRowCnt = 1;
         int actualRowCnt = boardService.write(createdBoard);
         assertTrue(expectedRowCnt == actualRowCnt);
@@ -213,7 +213,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt =1;
         int expectedTotalRowCnt =10;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             int actualRowCnt = boardService.write(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -231,7 +231,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt =1;
         int expectedTotalRowCnt =100;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             int actualRowCnt = boardService.write(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -248,7 +248,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt =1;
         int expectedTotalRowCnt =1000;
         for (int i=1; i<=expectedTotalRowCnt; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             int actualRowCnt = boardService.write(createdBoard);
             assertTrue(expectedRowCnt == actualRowCnt);
         }
@@ -264,8 +264,8 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedLength = 0;
 
-        List<BoardDTO> boardDTOS = boardService.getList();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardService.getList();
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -277,11 +277,11 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 리스트 사이즈가 1인지 확인
         cleanDB();
         int expectedLength = 1;
-        BoardDTO createdBoard = createData(1);
+        BoardDto createdBoard = createData(1);
         boardService.write(createdBoard);
 
-        List<BoardDTO> boardDTOS = boardService.getList();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardService.getList();
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -294,12 +294,12 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedLength = 10;
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardService.getList();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardService.getList();
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -312,12 +312,12 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedLength = 100;
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardService.getList();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardService.getList();
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -330,12 +330,12 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedLength = 1000;
         for (int i=1; i<=expectedLength; i++) {
-            BoardDTO createdBoard = createData(i);
+            BoardDto createdBoard = createData(i);
             boardService.write(createdBoard);
         }
 
-        List<BoardDTO> boardDTOS = boardService.getList();
-        int actualLength = boardDTOS.size();
+        List<BoardDto> boardDtos = boardService.getList();
+        int actualLength = boardDtos.size();
 
         assertTrue(expectedLength == actualLength);
     }
@@ -346,7 +346,7 @@ public class BoardServiceImpTest extends TestCase {
         // do : service로 데이터 조회
         // assert(compare) : null인지 확인
         cleanDB();
-        BoardDTO target = boardService.read(1);
+        BoardDto target = boardService.read(1);
         assertTrue(target == null);
     }
 
@@ -356,10 +356,10 @@ public class BoardServiceImpTest extends TestCase {
         // do : service로 데이터 조회
         // assert(compare) : 서로 같은 데이터인지 확인
         cleanDB();
-        BoardDTO createdData = createData(1);
+        BoardDto createdData = createData(1);
         boardService.write(createdData);
 
-        BoardDTO target = boardService.read(createdData.getBno());
+        BoardDto target = boardService.read(createdData.getBno());
 
         assertTrue(createdData.getWriter().equals(target.getWriter()));
         assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -374,10 +374,10 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -393,14 +393,14 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=1; i<=5; i++) {
             int randomIdx = (int)(Math.random() * 10) + 1;
-            BoardDTO createdData = createData(randomIdx);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto createdData = createData(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -417,10 +417,10 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -435,14 +435,14 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=1; i<=5; i++) {
             int randomIdx = (int)(Math.random() * 100) + 1;
-            BoardDTO createdData = createData(randomIdx);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto createdData = createData(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -458,10 +458,10 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -476,14 +476,14 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 각각 서로 같은 데이터인지 확인
         cleanDB();
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=1; i<=5; i++) {
             int randomIdx = (int)(Math.random() * 1000) + 1;
-            BoardDTO createdData = createData(randomIdx);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto createdData = createData(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(createdData.getWriter().equals(target.getWriter()));
             assertTrue(createdData.getTitle().equals(target.getTitle()));
@@ -511,11 +511,11 @@ public class BoardServiceImpTest extends TestCase {
         // assert(compare) : 적용된 로우수 1, 전체 테이블 로우수 0인지 확인, 조회된 데이터 null 확인
         cleanDB();
         int expectedRowCnt = 1;
-        BoardDTO createdData = createData(1);
+        BoardDto createdData = createData(1);
         boardService.write(createdData);
 
         int actualRowCnt = boardService.remove(createdData.getBno());
-        BoardDTO deletedData = boardService.read(createdData.getBno());
+        BoardDto deletedData = boardService.read(createdData.getBno());
 
         assertTrue(expectedRowCnt == actualRowCnt);
         assertTrue(deletedData == null);
@@ -531,11 +531,11 @@ public class BoardServiceImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO deletedData = boardService.read(createdData.getBno());
+            BoardDto deletedData = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedData == null);
@@ -555,7 +555,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
@@ -564,9 +564,9 @@ public class BoardServiceImpTest extends TestCase {
 
             if (boardService.read(randomIdx) == null) continue;
 
-            BoardDTO createdData = createData(randomIdx);
+            BoardDto createdData = createData(randomIdx);
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(target == null);
         }
@@ -582,11 +582,11 @@ public class BoardServiceImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO deletedData = boardService.read(createdData.getBno());
+            BoardDto deletedData = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedData == null);
@@ -605,7 +605,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
@@ -614,9 +614,9 @@ public class BoardServiceImpTest extends TestCase {
 
             if (boardService.read(randomIdx) == null) continue;
 
-            BoardDTO createdData = createData(randomIdx);
+            BoardDto createdData = createData(randomIdx);
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(target == null);
         }
@@ -632,11 +632,11 @@ public class BoardServiceImpTest extends TestCase {
         int expectedTotalRowCnt = 0;
 
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
 
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO deletedData = boardService.read(createdData.getBno());
+            BoardDto deletedData = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(deletedData == null);
@@ -655,7 +655,7 @@ public class BoardServiceImpTest extends TestCase {
         int expectedRowCnt = 1;
 
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
@@ -664,9 +664,9 @@ public class BoardServiceImpTest extends TestCase {
 
             if (boardService.read(randomIdx) == null) continue;
 
-            BoardDTO createdData = createData(randomIdx);
+            BoardDto createdData = createData(randomIdx);
             int actualRowCnt = boardService.remove(createdData.getBno());
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
             assertTrue(expectedRowCnt == actualRowCnt);
             assertTrue(target == null);
         }
@@ -678,7 +678,7 @@ public class BoardServiceImpTest extends TestCase {
         // do :service 통해서 데이터 수정
         // assert(compare) : 0 확인
         cleanDB();
-        BoardDTO updateData = createUpdateData(1);
+        BoardDto updateData = createUpdateData(1);
         int expectedRowCnt = 0;
 
         int actualRowCnt = boardService.modify(updateData);
@@ -693,13 +693,13 @@ public class BoardServiceImpTest extends TestCase {
         // do : service 통해서 데이터 수정
         // assert(compare) : 조회된 데이터와 수정용 데이터 내용 비교
         cleanDB();
-        BoardDTO createdData = createData(1);
-        BoardDTO updateData = createUpdateData(createdData.getBno());
+        BoardDto createdData = createData(1);
+        BoardDto updateData = createUpdateData(createdData.getBno());
         int expectedRowCnt = 1;
 
         boardService.write(createdData);
         int actualRowCnt = boardService.modify(updateData);
-        BoardDTO target = boardService.read(createdData.getBno());
+        BoardDto target = boardService.read(createdData.getBno());
 
         assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -717,13 +717,13 @@ public class BoardServiceImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
-            BoardDTO updateData = createUpdateData(createdData.getBno());
+            BoardDto createdData = createData(i);
+            BoardDto updateData = createUpdateData(createdData.getBno());
             int expectedRowCnt = 1;
 
             boardService.write(createdData);
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -741,15 +741,15 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 1;
         for (int i=1; i<=10; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=0; i<5; i++) {
             int randomIdx = (int)(Math.random() * 10) + 1;
-            BoardDTO updateData = createUpdateData(randomIdx);
+            BoardDto updateData = createUpdateData(randomIdx);
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -768,13 +768,13 @@ public class BoardServiceImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
-            BoardDTO updateData = createUpdateData(createdData.getBno());
+            BoardDto createdData = createData(i);
+            BoardDto updateData = createUpdateData(createdData.getBno());
             int expectedRowCnt = 1;
 
             boardService.write(createdData);
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -793,15 +793,15 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 1;
         for (int i=1; i<=100; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=0; i<5; i++) {
             int randomIdx = (int)(Math.random() * 100) + 1;
-            BoardDTO updateData = createUpdateData(randomIdx);
+            BoardDto updateData = createUpdateData(randomIdx);
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -820,13 +820,13 @@ public class BoardServiceImpTest extends TestCase {
 
         cleanDB();
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
-            BoardDTO updateData = createUpdateData(createdData.getBno());
+            BoardDto createdData = createData(i);
+            BoardDto updateData = createUpdateData(createdData.getBno());
             int expectedRowCnt = 1;
 
             boardService.write(createdData);
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(createdData.getBno());
+            BoardDto target = boardService.read(createdData.getBno());
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -845,16 +845,16 @@ public class BoardServiceImpTest extends TestCase {
         cleanDB();
         int expectedRowCnt = 1;
         for (int i=1; i<=1000; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardService.write(createdData);
         }
 
         for (int i=0; i<5; i++) {
             int randomIdx = (int)(Math.random() * 1000) + 1;
-            BoardDTO updateData = createUpdateData(randomIdx);
+            BoardDto updateData = createUpdateData(randomIdx);
 
             int actualRowCnt = boardService.modify(updateData);
-            BoardDTO target = boardService.read(randomIdx);
+            BoardDto target = boardService.read(randomIdx);
 
             assertTrue(expectedRowCnt == actualRowCnt);
 
@@ -873,19 +873,19 @@ public class BoardServiceImpTest extends TestCase {
 
     private void insertData(int amount) throws Exception {
         for (int i=1; i<=amount; i++) {
-            BoardDTO createdData = createData(i);
+            BoardDto createdData = createData(i);
             boardDao.insert(createdData);
         }
     }
 
-    private BoardDTO createData(int i) {
-        BoardDTO createdBoard = new BoardDTO(i, "title1", "content1", "writer1", 1, 1, null, null);
+    private BoardDto createData(int i) {
+        BoardDto createdBoard = new BoardDto(i, "title1", "content1", "writer1", 1, 1, null, null);
         return createdBoard;
     }
 
 
-    private BoardDTO createUpdateData(int i) {
-        BoardDTO createdBoard = new BoardDTO(i, "title2", "content2", "writer2", 1, 1, null, null);
+    private BoardDto createUpdateData(int i) {
+        BoardDto createdBoard = new BoardDto(i, "title2", "content2", "writer2", 1, 1, null, null);
         return createdBoard;
     }
 

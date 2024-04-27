@@ -65,7 +65,6 @@
     LIMIT #{offset}, #{pageSize}
   </select>
 
-  <!--  📌 특정 게시글의 댓글수 증가 -->
   <update id="updateCommentCnt" parameterType="map">
     UPDATE BOARD
     SET comment_cnt = comment_cnt + #{cnt}

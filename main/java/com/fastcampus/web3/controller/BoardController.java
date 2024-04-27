@@ -1,13 +1,11 @@
 package com.fastcampus.web3.controller;
 import com.fastcampus.web3.domain.PageHandler;
-import com.fastcampus.web3.dto.BoardDTO;
+import com.fastcampus.web3.dto.BoardDto;
 import com.fastcampus.web3.service.BoardService;
-import java.rmi.server.ExportException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +47,7 @@ public class BoardController {
         try {
             int totalCnt = boardService.getCount();
             System.out.println(currPage + ", " + pageSize);
-            List<BoardDTO> list = boardService.getPage(currPage, pageSize);
+            List<BoardDto> list = boardService.getPage(currPage, pageSize);
             PageHandler ph = new PageHandler(currPage, totalCnt);
             model.addAttribute("ph", ph);
             model.addAttribute("list", list);
@@ -68,7 +66,7 @@ public class BoardController {
     @GetMapping("/read")
     public String read(Integer bno, Model model) throws Exception {
         try {
-            BoardDTO boardDTO = boardService.read(bno);
+            BoardDto boardDTO = boardService.read(bno);
             System.out.println(boardDTO.getView_cnt());
             model.addAttribute("boardDTO", boardDTO);
         } catch (Exception e) {
@@ -93,7 +91,7 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(BoardDTO boardDTO) {
+    public String remove(BoardDto boardDTO) {
         try {
             int rowCnt = boardService.remove(boardDTO.getBno());
             if (rowCnt != 1) {
@@ -118,7 +116,7 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String write(BoardDTO boardDTO) {
+    public String write(BoardDto boardDTO) {
         try {
             int rowCnt = boardService.write(boardDTO);
             if (rowCnt != 1) {
@@ -138,7 +136,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(BoardDTO boardDTO) {
+    public String modify(BoardDto boardDTO) {
         try {
             int rowCnt = boardService.modify(boardDTO);
             if (rowCnt != 1) {

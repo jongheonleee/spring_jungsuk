@@ -2,7 +2,7 @@ package com.fastcampus.web3.dto;
 
 import java.util.Date;
 
-public class BoardDTO {
+public class BoardDto {
 
     private int bno; // 번호
     private String title; // 글제목
@@ -13,9 +13,15 @@ public class BoardDTO {
     private Date reg_date; // 등록일
     private Date up_date; // 수정일
 
-    public BoardDTO() {}
+    public BoardDto() {}
 
-    public BoardDTO(int bno, String title, String content, String writer, int view_cnt, int comment_cnt, Date reg_date, Date up_date) {
+    public BoardDto(String title, String content, String writer) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+    }
+
+    public BoardDto(int bno, String title, String content, String writer, int view_cnt, int comment_cnt, Date reg_date, Date up_date) {
         this.bno = bno;
         this.title = title;
         this.content = content;

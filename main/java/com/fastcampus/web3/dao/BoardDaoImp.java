@@ -1,7 +1,6 @@
 package com.fastcampus.web3.dao;
 
-import com.fastcampus.web3.dto.BoardDTO;
-import java.util.HashMap;
+import com.fastcampus.web3.dto.BoardDto;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
@@ -23,17 +22,17 @@ public class BoardDaoImp implements BoardDao {
     }
 
     @Override
-    public BoardDTO select(Integer bno) throws Exception {
+    public BoardDto select(Integer bno) throws Exception {
         return session.selectOne(namespace + "select", bno);
     }
 
     @Override
-    public List<BoardDTO> selectAll() throws Exception {
+    public List<BoardDto> selectAll() throws Exception {
         return session.selectList(namespace + "selectAll");
     }
 
     @Override
-    public int insert(BoardDTO boardDTO) throws Exception {
+    public int insert(BoardDto boardDTO) throws Exception {
         return session.insert(namespace + "insert", boardDTO);
     }
 
@@ -48,7 +47,7 @@ public class BoardDaoImp implements BoardDao {
     }
 
     @Override
-    public int update(BoardDTO boardDTO) throws Exception {
+    public int update(BoardDto boardDTO) throws Exception {
         return session.update(namespace + "update", boardDTO);
     }
 
@@ -59,7 +58,7 @@ public class BoardDaoImp implements BoardDao {
 
 
     @Override
-    public List<BoardDTO> selectPage(Map map) throws Exception {
+    public List<BoardDto> selectPage(Map map) throws Exception {
         return session.selectList(namespace + "selectPage", map);
     }
 
