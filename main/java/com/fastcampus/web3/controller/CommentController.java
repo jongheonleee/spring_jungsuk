@@ -22,8 +22,12 @@ public class CommentController {
     CommentService service;
 
     @PatchMapping("/comments/{cno}")
-    public ResponseEntity<String> modify(@PathVariable Integer cno, @RequestBody CommentDto dto) {
+    public ResponseEntity<String> modify(@PathVariable Integer cno, @RequestBody CommentDto dto, HttpSession session) {
+
+        String commenter = "dd";
+        dto.setCommenter(commenter);
         dto.setCno(cno);
+
         try {
             if (service.modify(dto) != 1) {
                 throw new Exception("Write Failed");
@@ -40,6 +44,8 @@ public class CommentController {
         String commenter = "dd";
         dto.setCommenter(commenter);
         dto.setBno(bno);
+
+        System.out.println("dto = " + dto);
 
         try {
             int rowCnt = service.write(dto);
